@@ -1,0 +1,64 @@
+name: Daily Test Execution
+
+on:
+  schedule:
+    # Runs daily at 8:00 AM IST (2:30 AM UTC)
+    # IST is UTC+5:30, so 8:00 AM IST = 2:30 AM UTC
+    - cron: '30 2 * * *'
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Java 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: 'maven'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    - name: Run Maven tests
+      run: mvn clean test
+      
+    - name: Upload test reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: robotframework-reports
+        path: target/robotframework-reports/
+        retention-days: 30
+        
+    - name: Upload Maven test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: maven-surefire-reports
+        path: target/surefire-reports/
+        retention-days: 30
+        if-no-files-found: ignore
+        
+    - name: Test Summary
+      if: always()
+      run: |
+        echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ -f target/robotframework-reports/output.xml ]; then
+          echo "✅ Robot Framework tests executed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 View detailed reports in the artifacts section above." >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Test reports not found" >> $GITHUB_STEP_SUMMARY
+        fi
+

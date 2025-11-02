@@ -90,3 +90,33 @@ Failure rate for execution simulation is configurable in `MarketDataService` (de
 
 Price deviation threshold is 5% (configurable in `TradeService`).
 
+## GitHub Actions CI/CD
+
+This project includes automated daily test execution via GitHub Actions.
+
+### Daily Schedule
+- **Runs daily at 8:00 AM IST (2:30 AM UTC)**
+- Automatically executes all Robot Framework tests
+- Generates and stores test reports as artifacts
+
+### Manual Execution
+You can manually trigger the workflow:
+1. Go to **Actions** tab in GitHub
+2. Select **Daily Test Execution** workflow
+3. Click **Run workflow**
+
+### Viewing Results
+1. Navigate to **Actions** tab
+2. Select the workflow run
+3. Download artifacts to view HTML test reports
+4. Check logs for detailed execution information
+
+### Workflow Features
+- ✅ Automatic test execution on schedule
+- ✅ Java 11 setup and Maven dependency caching
+- ✅ Test report artifact generation
+- ✅ 30-day artifact retention
+- ✅ Test summary in workflow run
+
+See `.github/workflows/daily-tests.yml` for workflow configuration details.
+
