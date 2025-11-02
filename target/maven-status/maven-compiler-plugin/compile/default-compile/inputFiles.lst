@@ -1,8 +1,8 @@
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/TradingLibrary.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/model/MarketData.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/model/Instrument.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/model/Trade.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/MarketDataService.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/enums/TradeStatus.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/TradeService.java
-/Users/qa/Documents/demo_project/src/main/java/com/mocktrading/InstrumentService.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/TradeService.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/InstrumentService.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/MarketDataService.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/model/Trade.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/TradingLibrary.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/model/Instrument.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/model/MarketData.java
+/Users/qa/Documents/Mock-trading-platform/src/main/java/com/mocktrading/enums/TradeStatus.java

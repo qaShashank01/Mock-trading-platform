@@ -85,9 +85,16 @@ System Failure In Execution With Retry
             ${executed}=    Set Variable    ${True}
             Exit For Loop
         ELSE
-            ${error}=    Run Keyword And Expect Error    *    Execute Trade    ${tradeId}
-            Log    Retry ${i+1}: ${error}
-            Should Contain    ${error}    System failure    OR    Trade execution failed
+            ${tradeStatus}=    TradingLib.Get Trade    ${tradeId}
+            ${currentStatus}=    TradingLib.Verify Trade Status    ${tradeId}    CREATED
+            IF    ${currentStatus}
+                ${error}=    Run Keyword And Expect Error    *    Execute Trade    ${tradeId}
+                Log    Retry ${i+1}: ${error}
+                Should Contain    ${error}    System failure    OR    Trade execution failed
+            ELSE
+                ${executed}=    Set Variable    ${True}
+                Exit For Loop
+            END
         END
     END
     
