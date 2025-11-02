@@ -1,0 +1,8 @@
+com/mocktrading/enums/TradeStatus.class
+com/mocktrading/model/Trade.class
+com/mocktrading/model/MarketData.class
+com/mocktrading/MarketDataService.class
+com/mocktrading/TradeService.class
+com/mocktrading/InstrumentService.class
+com/mocktrading/model/Instrument.class
+com/mocktrading/TradingLibrary.class

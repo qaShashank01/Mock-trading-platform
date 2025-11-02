@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite failures="0" skipped="0" tests="5" name="Tests" time="1.485" errors="0">
+<testcase classname="Tests.TradeLifecycleTests" name="Create And Confirm Valid Trade" time="0.344">
+</testcase>
+<testcase classname="Tests.TradeLifecycleTests" name="Invalid ISIN Trade Rejection" time="0.126">
+</testcase>
+<testcase classname="Tests.TradeLifecycleTests" name="Price Deviation Trade Rejection" time="0.161">
+</testcase>
+<testcase classname="Tests.TradeLifecycleTests" name="Execute Already Confirmed Trade Error Handling" time="0.196">
+</testcase>
+<testcase classname="Tests.TradeLifecycleTests" name="System Failure In Execution With Retry" time="0.190">
+</testcase>
+</testsuite>

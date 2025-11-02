@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generator="Robot 4.0.1 (Jython 2.7.2 on java21.0.8)" schemaversion="2" generated="20251103 00:11:47.271">
+<suite source="/Users/qa/Documents/demo_project/src/test/resources/tests" name="Tests" id="s1">
+<suite source="/Users/qa/Documents/demo_project/src/test/resources/tests/TradeLifecycleTests.robot" name="TradeLifecycleTests" id="s1-s1">
+<test name="Create And Confirm Valid Trade" id="s1-s1-t1">
+<kw library="BuiltIn" name="Set Variable">
+<var>${isin}</var>
+<arg>US0378331005</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:47.741">${isin} = US0378331005</msg>
+<status endtime="20251103 00:11:47.744" starttime="20251103 00:11:47.728" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${quantity}</var>
+<arg>100</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:47.754">${quantity} = 100</msg>
+<status endtime="20251103 00:11:47.755" starttime="20251103 00:11:47.746" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Market Data Mid Price">
+<var>${tradePrice}</var>
+<arg>${isin}</arg>
+<doc>Gets the mid price (average of bid and ask) for an instrument</doc>
+<kw library="TradingLib" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.781">${midPrice} = 102.762465476</msg>
+<status endtime="20251103 00:11:47.782" starttime="20251103 00:11:47.767" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:47.787">${tradePrice} = 102.762465476</msg>
+<status endtime="20251103 00:11:47.788" starttime="20251103 00:11:47.757" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${tradePrice}</arg>
+<doc>Creates a new trade with given parameters</doc>
+<kw library="TradingLib" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.823">${trade} = Trade{tradeId='TRD00000001', isin='US0378331005', quantity=100, price=102.76, status=CREATED}</msg>
+<status endtime="20251103 00:11:47.825" starttime="20251103 00:11:47.803" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:47.829">${trade} = Trade{tradeId='TRD00000001', isin='US0378331005', quantity=100, price=102.76, status=CREATED}</msg>
+<status endtime="20251103 00:11:47.831" starttime="20251103 00:11:47.789" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.847">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:47.848" starttime="20251103 00:11:47.840" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:47.850">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:47.851" starttime="20251103 00:11:47.832" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Verify Trade Status">
+<arg>${tradeId}</arg>
+<arg>CREATED</arg>
+<doc>Verifies trade status matches expected value</doc>
+<kw library="TradingLib" name="Verify Trade Status">
+<var>${result}</var>
+<arg>${tradeId}</arg>
+<arg>${expectedStatus}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.883">${result} = True</msg>
+<status endtime="20251103 00:11:47.884" starttime="20251103 00:11:47.865" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<arg>${result}</arg>
+<arg>Trade status verification failed</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status endtime="20251103 00:11:47.899" starttime="20251103 00:11:47.885" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:47.901" starttime="20251103 00:11:47.853" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Execute Trade">
+<var>${executedTrade}</var>
+<arg>${tradeId}</arg>
+<doc>Executes a trade (CREATED -&gt; EXECUTED)</doc>
+<kw library="TradingLib" name="Execute Trade">
+<var>${trade}</var>
+<arg>${tradeId}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.923">${trade} = Trade{tradeId='TRD00000001', isin='US0378331005', quantity=100, price=102.76, status=EXECUTED}</msg>
+<status endtime="20251103 00:11:47.923" starttime="20251103 00:11:47.915" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:47.927">${executedTrade} = Trade{tradeId='TRD00000001', isin='US0378331005', quantity=100, price=102.76, status=EXECUTED}</msg>
+<status endtime="20251103 00:11:47.927" starttime="20251103 00:11:47.905" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${executedTradeId}</var>
+<arg>${executedTrade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.942">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:47.944" starttime="20251103 00:11:47.936" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:47.946">${executedTradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:47.947" starttime="20251103 00:11:47.929" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Verify Trade Status">
+<arg>${executedTradeId}</arg>
+<arg>EXECUTED</arg>
+<doc>Verifies trade status matches expected value</doc>
+<kw library="TradingLib" name="Verify Trade Status">
+<var>${result}</var>
+<arg>${tradeId}</arg>
+<arg>${expectedStatus}</arg>
+<msg level="INFO" timestamp="20251103 00:11:47.972">${result} = True</msg>
+<status endtime="20251103 00:11:47.973" starttime="20251103 00:11:47.959" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<arg>${result}</arg>
+<arg>Trade status verification failed</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status endtime="20251103 00:11:47.988" starttime="20251103 00:11:47.975" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:47.989" starttime="20251103 00:11:47.948" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Confirm Trade">
+<var>${confirmedTrade}</var>
+<arg>${executedTradeId}</arg>
+<doc>Confirms an executed trade (EXECUTED -&gt; CONFIRMED)</doc>
+<kw library="TradingLib" name="Confirm Trade">
+<var>${trade}</var>
+<arg>${tradeId}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.005">${trade} = Trade{tradeId='TRD00000001', isin='US0378331005', quantity=100, price=102.76, status=CONFIRMED}</msg>
+<status endtime="20251103 00:11:48.005" starttime="20251103 00:11:47.997" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.007">${confirmedTrade} = Trade{tradeId='TRD00000001', isin='US0378331005', quantity=100, price=102.76, status=CONFIRMED}</msg>
+<status endtime="20251103 00:11:48.008" starttime="20251103 00:11:47.990" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${confirmedTradeId}</var>
+<arg>${confirmedTrade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.025">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.026" starttime="20251103 00:11:48.019" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.028">${confirmedTradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.028" starttime="20251103 00:11:48.009" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Verify Trade Status">
+<arg>${confirmedTradeId}</arg>
+<arg>CONFIRMED</arg>
+<doc>Verifies trade status matches expected value</doc>
+<kw library="TradingLib" name="Verify Trade Status">
+<var>${result}</var>
+<arg>${tradeId}</arg>
+<arg>${expectedStatus}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.047">${result} = True</msg>
+<status endtime="20251103 00:11:48.048" starttime="20251103 00:11:48.038" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<arg>${result}</arg>
+<arg>Trade status verification failed</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status endtime="20251103 00:11:48.058" starttime="20251103 00:11:48.049" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:48.060" starttime="20251103 00:11:48.029" status="PASS"/>
+</kw>
+<doc>Scenario 1: Create and confirm a valid trade
+Expected: Status transitions CREATED → EXECUTED → CONFIRMED</doc>
+<status endtime="20251103 00:11:48.061" starttime="20251103 00:11:47.717" status="PASS"/>
+</test>
+<test name="Invalid ISIN Trade Rejection" id="s1-s1-t2">
+<kw library="BuiltIn" name="Set Variable">
+<var>${invalidIsin}</var>
+<arg>INVALID123456</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.080">${invalidIsin} = INVALID123456</msg>
+<status endtime="20251103 00:11:48.081" starttime="20251103 00:11:48.070" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${quantity}</var>
+<arg>100</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.093">${quantity} = 100</msg>
+<status endtime="20251103 00:11:48.094" starttime="20251103 00:11:48.083" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${price}</var>
+<arg>100.0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.103">${price} = 100.0</msg>
+<status endtime="20251103 00:11:48.104" starttime="20251103 00:11:48.095" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Run Keyword And Expect Error">
+<arg>Trade creation failed: Trade rejected: Invalid ISIN</arg>
+<arg>Create Trade</arg>
+<arg>${invalidIsin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw library="TradeKeywords" name="Create Trade">
+<arg>${invalidIsin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<doc>Creates a new trade with given parameters</doc>
+<kw library="TradingLib" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<msg level="FAIL" timestamp="20251103 00:11:48.175">Trade creation failed: Trade rejected: Invalid ISIN</msg>
+<status endtime="20251103 00:11:48.177" starttime="20251103 00:11:48.132" status="FAIL"/>
+</kw>
+<status endtime="20251103 00:11:48.186" starttime="20251103 00:11:48.109" status="FAIL"/>
+</kw>
+<status endtime="20251103 00:11:48.189" starttime="20251103 00:11:48.105" status="PASS"/>
+</kw>
+<doc>Scenario 2: Invalid ISIN trade
+Expected: Trade rejected with error</doc>
+<status endtime="20251103 00:11:48.190" starttime="20251103 00:11:48.064" status="PASS"/>
+</test>
+<test name="Price Deviation Trade Rejection" id="s1-s1-t3">
+<kw library="BuiltIn" name="Set Variable">
+<var>${isin}</var>
+<arg>US5949181045</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.201">${isin} = US5949181045</msg>
+<status endtime="20251103 00:11:48.202" starttime="20251103 00:11:48.196" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${quantity}</var>
+<arg>50</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.210">${quantity} = 50</msg>
+<status endtime="20251103 00:11:48.210" starttime="20251103 00:11:48.203" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<doc>Gets the mid price (average of bid and ask) for an instrument</doc>
+<kw library="TradingLib" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.233">${midPrice} = 97.7108894472</msg>
+<status endtime="20251103 00:11:48.234" starttime="20251103 00:11:48.221" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.236">${midPrice} = 97.7108894472</msg>
+<status endtime="20251103 00:11:48.237" starttime="20251103 00:11:48.213" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Evaluate">
+<var>${deviatedPrice}</var>
+<arg>${midPrice} * 1.10</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.248">${deviatedPrice} = 107.481978392</msg>
+<status endtime="20251103 00:11:48.248" starttime="20251103 00:11:48.237" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${deviatedPrice}</arg>
+<doc>Creates a new trade with given parameters</doc>
+<kw library="TradingLib" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.275">${trade} = Trade{tradeId='TRD00000001', isin='US5949181045', quantity=50, price=107.48, status=REJECTED}</msg>
+<status endtime="20251103 00:11:48.275" starttime="20251103 00:11:48.264" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.277">${trade} = Trade{tradeId='TRD00000001', isin='US5949181045', quantity=50, price=107.48, status=REJECTED}</msg>
+<status endtime="20251103 00:11:48.278" starttime="20251103 00:11:48.250" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.288">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.289" starttime="20251103 00:11:48.283" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.291">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.292" starttime="20251103 00:11:48.278" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Verify Trade Status">
+<arg>${tradeId}</arg>
+<arg>REJECTED</arg>
+<doc>Verifies trade status matches expected value</doc>
+<kw library="TradingLib" name="Verify Trade Status">
+<var>${result}</var>
+<arg>${tradeId}</arg>
+<arg>${expectedStatus}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.311">${result} = True</msg>
+<status endtime="20251103 00:11:48.312" starttime="20251103 00:11:48.302" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<arg>${result}</arg>
+<arg>Trade status verification failed</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status endtime="20251103 00:11:48.323" starttime="20251103 00:11:48.313" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:48.324" starttime="20251103 00:11:48.293" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Rejection Reason">
+<var>${rejectionReason}</var>
+<arg>${trade}</arg>
+<doc>Gets rejection reason from trade object</doc>
+<kw library="TradingLib" name="Get Trade Rejection Reason">
+<var>${reason}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.339">${reason} = Price deviation exceeds 5%</msg>
+<status endtime="20251103 00:11:48.340" starttime="20251103 00:11:48.332" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.342">${rejectionReason} = Price deviation exceeds 5%</msg>
+<status endtime="20251103 00:11:48.343" starttime="20251103 00:11:48.325" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Contain">
+<arg>${rejectionReason}</arg>
+<arg>Price deviation</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status endtime="20251103 00:11:48.352" starttime="20251103 00:11:48.344" status="PASS"/>
+</kw>
+<doc>Scenario 3: Price deviates from market
+Expected: Trade rejected with reason 'Price deviation'</doc>
+<status endtime="20251103 00:11:48.354" starttime="20251103 00:11:48.193" status="PASS"/>
+</test>
+<test name="Execute Already Confirmed Trade Error Handling" id="s1-s1-t4">
+<kw library="BuiltIn" name="Set Variable">
+<var>${isin}</var>
+<arg>US02079K3059</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.368">${isin} = US02079K3059</msg>
+<status endtime="20251103 00:11:48.369" starttime="20251103 00:11:48.362" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${quantity}</var>
+<arg>75</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.377">${quantity} = 75</msg>
+<status endtime="20251103 00:11:48.378" starttime="20251103 00:11:48.370" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<doc>Gets the mid price (average of bid and ask) for an instrument</doc>
+<kw library="TradingLib" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.395">${midPrice} = 109.028663751</msg>
+<status endtime="20251103 00:11:48.395" starttime="20251103 00:11:48.387" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.397">${midPrice} = 109.028663751</msg>
+<status endtime="20251103 00:11:48.398" starttime="20251103 00:11:48.379" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${midPrice}</arg>
+<doc>Creates a new trade with given parameters</doc>
+<kw library="TradingLib" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.423">${trade} = Trade{tradeId='TRD00000001', isin='US02079K3059', quantity=75, price=109.03, status=CREATED}</msg>
+<status endtime="20251103 00:11:48.423" starttime="20251103 00:11:48.412" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.425">${trade} = Trade{tradeId='TRD00000001', isin='US02079K3059', quantity=75, price=109.03, status=CREATED}</msg>
+<status endtime="20251103 00:11:48.426" starttime="20251103 00:11:48.398" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.436">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.436" starttime="20251103 00:11:48.431" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.437">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.438" starttime="20251103 00:11:48.426" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Execute Trade">
+<var>${executedTrade}</var>
+<arg>${tradeId}</arg>
+<doc>Executes a trade (CREATED -&gt; EXECUTED)</doc>
+<kw library="TradingLib" name="Execute Trade">
+<var>${trade}</var>
+<arg>${tradeId}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.448">${trade} = Trade{tradeId='TRD00000001', isin='US02079K3059', quantity=75, price=109.03, status=EXECUTED}</msg>
+<status endtime="20251103 00:11:48.448" starttime="20251103 00:11:48.443" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.449">${executedTrade} = Trade{tradeId='TRD00000001', isin='US02079K3059', quantity=75, price=109.03, status=EXECUTED}</msg>
+<status endtime="20251103 00:11:48.450" starttime="20251103 00:11:48.438" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${executedTradeId}</var>
+<arg>${executedTrade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.459">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.460" starttime="20251103 00:11:48.455" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.461">${executedTradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.461" starttime="20251103 00:11:48.450" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Confirm Trade">
+<var>${confirmedTrade}</var>
+<arg>${executedTradeId}</arg>
+<doc>Confirms an executed trade (EXECUTED -&gt; CONFIRMED)</doc>
+<kw library="TradingLib" name="Confirm Trade">
+<var>${trade}</var>
+<arg>${tradeId}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.475">${trade} = Trade{tradeId='TRD00000001', isin='US02079K3059', quantity=75, price=109.03, status=CONFIRMED}</msg>
+<status endtime="20251103 00:11:48.475" starttime="20251103 00:11:48.469" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.477">${confirmedTrade} = Trade{tradeId='TRD00000001', isin='US02079K3059', quantity=75, price=109.03, status=CONFIRMED}</msg>
+<status endtime="20251103 00:11:48.477" starttime="20251103 00:11:48.462" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${confirmedTradeId}</var>
+<arg>${confirmedTrade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.487">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.488" starttime="20251103 00:11:48.482" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.489">${confirmedTradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.490" starttime="20251103 00:11:48.478" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Verify Trade Status">
+<arg>${confirmedTradeId}</arg>
+<arg>CONFIRMED</arg>
+<doc>Verifies trade status matches expected value</doc>
+<kw library="TradingLib" name="Verify Trade Status">
+<var>${result}</var>
+<arg>${tradeId}</arg>
+<arg>${expectedStatus}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.506">${result} = True</msg>
+<status endtime="20251103 00:11:48.507" starttime="20251103 00:11:48.498" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<arg>${result}</arg>
+<arg>Trade status verification failed</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status endtime="20251103 00:11:48.514" starttime="20251103 00:11:48.507" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:48.515" starttime="20251103 00:11:48.490" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Run Keyword And Expect Error">
+<arg>Trade execution failed: Trade already confirmed: *</arg>
+<arg>Execute Trade</arg>
+<arg>${confirmedTradeId}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw library="TradeKeywords" name="Execute Trade">
+<arg>${confirmedTradeId}</arg>
+<doc>Executes a trade (CREATED -&gt; EXECUTED)</doc>
+<kw library="TradingLib" name="Execute Trade">
+<var>${trade}</var>
+<arg>${tradeId}</arg>
+<msg level="FAIL" timestamp="20251103 00:11:48.543">Trade execution failed: Trade already confirmed: TRD00000001</msg>
+<status endtime="20251103 00:11:48.544" starttime="20251103 00:11:48.523" status="FAIL"/>
+</kw>
+<status endtime="20251103 00:11:48.551" starttime="20251103 00:11:48.517" status="FAIL"/>
+</kw>
+<status endtime="20251103 00:11:48.553" starttime="20251103 00:11:48.516" status="PASS"/>
+</kw>
+<doc>Scenario 4: Execute already confirmed trade
+Expected: Error handled gracefully</doc>
+<status endtime="20251103 00:11:48.554" starttime="20251103 00:11:48.358" status="PASS"/>
+</test>
+<test name="System Failure In Execution With Retry" id="s1-s1-t5">
+<kw library="BuiltIn" name="Set Variable">
+<var>${isin}</var>
+<arg>GB0002875804</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.567">${isin} = GB0002875804</msg>
+<status endtime="20251103 00:11:48.568" starttime="20251103 00:11:48.559" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${quantity}</var>
+<arg>200</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.575">${quantity} = 200</msg>
+<status endtime="20251103 00:11:48.576" starttime="20251103 00:11:48.569" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<doc>Gets the mid price (average of bid and ask) for an instrument</doc>
+<kw library="TradingLib" name="Get Market Data Mid Price">
+<var>${midPrice}</var>
+<arg>${isin}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.593">${midPrice} = 97.1042667597</msg>
+<status endtime="20251103 00:11:48.594" starttime="20251103 00:11:48.585" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.596">${midPrice} = 97.1042667597</msg>
+<status endtime="20251103 00:11:48.597" starttime="20251103 00:11:48.577" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${midPrice}</arg>
+<doc>Creates a new trade with given parameters</doc>
+<kw library="TradingLib" name="Create Trade">
+<var>${trade}</var>
+<arg>${isin}</arg>
+<arg>${quantity}</arg>
+<arg>${price}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.620">${trade} = Trade{tradeId='TRD00000001', isin='GB0002875804', quantity=200, price=97.10, status=CREATED}</msg>
+<status endtime="20251103 00:11:48.620" starttime="20251103 00:11:48.609" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.621">${trade} = Trade{tradeId='TRD00000001', isin='GB0002875804', quantity=200, price=97.10, status=CREATED}</msg>
+<status endtime="20251103 00:11:48.622" starttime="20251103 00:11:48.598" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.635">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.636" starttime="20251103 00:11:48.627" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.637">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.638" starttime="20251103 00:11:48.623" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${maxRetries}</var>
+<arg>5</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.642">${maxRetries} = 5</msg>
+<status endtime="20251103 00:11:48.642" starttime="20251103 00:11:48.638" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${executed}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.649">${executed} = False</msg>
+<status endtime="20251103 00:11:48.650" starttime="20251103 00:11:48.643" status="PASS"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${maxRetries}</value>
+<iter>
+<var name="${i}">0</var>
+<kw library="BuiltIn" name="Run Keyword And Return Status">
+<var>${result}</var>
+<arg>Execute Trade</arg>
+<arg>${tradeId}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw library="TradeKeywords" name="Execute Trade">
+<arg>${tradeId}</arg>
+<doc>Executes a trade (CREATED -&gt; EXECUTED)</doc>
+<kw library="TradingLib" name="Execute Trade">
+<var>${trade}</var>
+<arg>${tradeId}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.669">${trade} = Trade{tradeId='TRD00000001', isin='GB0002875804', quantity=200, price=97.10, status=EXECUTED}</msg>
+<status endtime="20251103 00:11:48.669" starttime="20251103 00:11:48.664" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:48.670" starttime="20251103 00:11:48.658" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.671">${result} = True</msg>
+<status endtime="20251103 00:11:48.671" starttime="20251103 00:11:48.657" status="PASS"/>
+</kw>
+<if>
+<branch type="IF" condition="${result}">
+<kw library="TradingLib" name="Get Trade">
+<var>${executedTrade}</var>
+<arg>${tradeId}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.678">${executedTrade} = Trade{tradeId='TRD00000001', isin='GB0002875804', quantity=200, price=97.10, status=EXECUTED}</msg>
+<status endtime="20251103 00:11:48.678" starttime="20251103 00:11:48.673" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Get Trade Id">
+<var>${executedTradeId}</var>
+<arg>${executedTrade}</arg>
+<doc>Extracts trade ID from trade object</doc>
+<kw library="TradingLib" name="Get Trade Id">
+<var>${tradeId}</var>
+<arg>${trade}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.688">${tradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.689" starttime="20251103 00:11:48.684" status="PASS"/>
+</kw>
+<msg level="INFO" timestamp="20251103 00:11:48.690">${executedTradeId} = TRD00000001</msg>
+<status endtime="20251103 00:11:48.691" starttime="20251103 00:11:48.679" status="PASS"/>
+</kw>
+<kw library="TradeKeywords" name="Verify Trade Status">
+<arg>${executedTradeId}</arg>
+<arg>EXECUTED</arg>
+<doc>Verifies trade status matches expected value</doc>
+<kw library="TradingLib" name="Verify Trade Status">
+<var>${result}</var>
+<arg>${tradeId}</arg>
+<arg>${expectedStatus}</arg>
+<msg level="INFO" timestamp="20251103 00:11:48.707">${result} = True</msg>
+<status endtime="20251103 00:11:48.707" starttime="20251103 00:11:48.699" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<arg>${result}</arg>
+<arg>Trade status verification failed</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status endtime="20251103 00:11:48.717" starttime="20251103 00:11:48.708" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:48.718" starttime="20251103 00:11:48.691" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Set Variable">
+<var>${executed}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.723">${executed} = True</msg>
+<status endtime="20251103 00:11:48.724" starttime="20251103 00:11:48.719" status="PASS"/>
+</kw>
+<kw library="BuiltIn" name="Exit For Loop">
+<doc>Stops executing the enclosing for loop.</doc>
+<msg level="INFO" timestamp="20251103 00:11:48.727">Exiting for loop altogether.</msg>
+<status endtime="20251103 00:11:48.734" starttime="20251103 00:11:48.725" status="PASS"/>
+</kw>
+<status endtime="20251103 00:11:48.735" starttime="20251103 00:11:48.672" status="PASS"/>
+</branch>
+<branch type="ELSE">
+<kw library="BuiltIn" name="Run Keyword And Expect Error">
+<var>${error}</var>
+<arg>*</arg>
+<arg>Execute Trade</arg>
+<arg>${tradeId}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status endtime="20251103 00:11:48.737" starttime="20251103 00:11:48.736" status="NOT RUN"/>
+</kw>
+<kw library="BuiltIn" name="Log">
+<arg>Retry ${i+1}: ${error}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status endtime="20251103 00:11:48.738" starttime="20251103 00:11:48.737" status="NOT RUN"/>
+</kw>
+<kw library="BuiltIn" name="Should Contain">
+<arg>${error}</arg>
+<arg>System failure</arg>
+<arg>OR</arg>
+<arg>Trade execution failed</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status endtime="20251103 00:11:48.739" starttime="20251103 00:11:48.738" status="NOT RUN"/>
+</kw>
+<status endtime="20251103 00:11:48.739" starttime="20251103 00:11:48.735" status="NOT RUN"/>
+</branch>
+<status endtime="20251103 00:11:48.740" starttime="20251103 00:11:48.671" status="PASS"/>
+</if>
+<status endtime="20251103 00:11:48.740" starttime="20251103 00:11:48.655" status="PASS"/>
+</iter>
+<status endtime="20251103 00:11:48.741" starttime="20251103 00:11:48.650" status="PASS"/>
+</for>
+<kw library="BuiltIn" name="Run Keyword If">
+<arg>not ${executed}</arg>
+<arg>Fail</arg>
+<arg>Trade execution failed after ${maxRetries} attempts. Expected success or proper error handling.</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status endtime="20251103 00:11:48.745" starttime="20251103 00:11:48.741" status="PASS"/>
+</kw>
+<doc>Scenario 5: Simulate system failure in execution
+Expected: Proper retry/error assertion</doc>
+<status endtime="20251103 00:11:48.746" starttime="20251103 00:11:48.556" status="PASS"/>
+</test>
+<status endtime="20251103 00:11:48.753" starttime="20251103 00:11:47.556" status="PASS"/>
+</suite>
+<status endtime="20251103 00:11:48.770" starttime="20251103 00:11:47.285" status="PASS"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" skip="0" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="5" skip="0" fail="0" name="Tests" id="s1">Tests</stat>
+<stat pass="5" skip="0" fail="0" name="TradeLifecycleTests" id="s1-s1">Tests.TradeLifecycleTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg level="WARN" timestamp="20251103 00:11:47.075">Command line option --xunitskipnoncritical has been deprecated and has no effect.</msg>
+</errors>
+</robot>
